@@ -68,21 +68,23 @@ const ImageAnalyzer = () => {
 
       {info && (
         <>
+        <h3>{activeTab}</h3>
+          <InfoText label="Actual Dimensions:" value={`${info.width}x${info.height}px`} />
+
           <InfoText
             className={info.fileSize > 100 ? 'red' : 'green'}
             label={
               <>
-                File Size: {info.fileSize > 100 ? 'Too Big 😢' : 'Perfect 😊'}
+                <strong>File Size</strong>: {info.fileSize > 100 ? 'Too Big 😢' : 'Perfect 😊'}
               </>
             }
             value={`${info.fileSize.toFixed(2)} KB`}
           />
 
-          <InfoText label="Actual Dimensions:" value={`${info.width}x${info.height}px`} />
 
           {/* Show only selected tab’s spec */}
           <div style={{ marginTop: '1rem' }}>
-            <h3>{activeTab}</h3>
+            
             {Object.entries(specData[activeTab] || {}).map(([device, dimension]) => {
               const [expectedWidth, expectedHeight] = dimension.replace(/\s+/g, '').split('x').map(Number);
               if (!expectedWidth || !expectedHeight) return null;
